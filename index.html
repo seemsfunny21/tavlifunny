@@ -80,17 +80,185 @@ h1{font-size:clamp(22px,5vw,28px);margin:2px}.subtitle{font-size:12px;color:#9cb
  .move-btn{font-size:11px;padding:6px}
 }
 
+
+/* Premium blue wood and an open fold for dice, without a separate header. */
+.panel{gap:0;--tavli-width:min(100%,calc(100dvh * 2.08))}
+.board-wrap{
+ --fold-height:clamp(53px,12dvh,72px);
+ position:relative;isolation:isolate;
+ width:var(--tavli-width);max-width:100%;
+ max-height:min(100%,calc(100vw * .91));height:auto;min-height:0;
+ flex:1 1 auto;margin:auto 0;
+ padding:5px;border:6px solid #1b4260;border-radius:12px;
+ background:
+  linear-gradient(128deg,#0a273d5c 0%,#437ba83c 27%,#0b29446e 53%,#30597c49 77%,#061d32aa 100%),
+  repeating-linear-gradient(92deg,#214867 0 3px,#1b4263 4px 7px,#183a57 9px 14px);
+ box-shadow:
+  inset 0 0 0 2px #6ea8c18c,inset 0 5px 11px #0009,inset 0 -5px 11px #0009,
+  0 8px 24px #0008,0 0 18px #1587c122;
+}
+.board{
+ height:100%;width:100%;min-height:0;
+ grid-template-rows:repeat(2,minmax(0,1fr));
+ row-gap:var(--fold-height);column-gap:2px;
+ background:
+  repeating-linear-gradient(94deg,#ffffff04 0 2px,#081d3307 3px 5px,transparent 6px 13px),
+  radial-gradient(ellipse at 52% 50%,#2c658e,#164365 75%,#0b2f51);
+ border:1px solid #75a3bd44;border-radius:5px;
+}
+.board:before{
+ top:50%;bottom:auto;left:0;right:0;height:var(--fold-height);
+ transform:translateY(-50%);border-block:2px solid #082138a6;border-radius:0;
+ background:
+  linear-gradient(180deg,#041c31b7,#0c3455d9 16%,#123e60e6 44%,#0a2848d9 55%,#061d33bb),
+  repeating-linear-gradient(94deg,#82bcdd0c 0 2px,transparent 4px 10px);
+ pointer-events:none;z-index:0;
+}
+.center-bar{
+ background:linear-gradient(90deg,#061728,#426c86 13%,#164261 34%,#08243b 55%,#315d78 82%,#051a30);
+ border-inline:2px solid #8ab7d278;
+ box-shadow:inset 1px 0 3px #c1f1ff42,inset -2px 0 3px #031929,0 1px 8px #0008;
+}
+.bearing-tray{
+ background:linear-gradient(90deg,#061827,#325a76 20%,#0d2d4a 55%,#07192b);
+ border-inline:1px solid #8eafc07d;
+ box-shadow:inset 0 0 8px #0008;
+}
+.point{overflow:visible}
+.point:before{
+ filter:drop-shadow(0 1px 1px #00132382);
+}
+.point.top:before{
+ background:linear-gradient(170deg,#8eb6cf 0%,#5284a3 34%,#326487 73%,#143e60 98%);
+}
+.point.top:nth-child(even):before{
+ background:linear-gradient(170deg,#305e83 0%,#244d74 52%,#143b5e 93%);
+}
+.point.bottom:before{
+ background:linear-gradient(14deg,#8eb6cf 0%,#5284a3 34%,#326487 73%,#143e60 98%);
+}
+.point.bottom:nth-child(even):before{
+ background:linear-gradient(14deg,#305e83 0%,#244d74 52%,#143b5e 93%);
+}
+/* Destinations glow in the actual triangle, not a rectangular outline. */
+.point.selected:after,.point.legal:after,.point.legal-double:after,.point.legal-both:after{
+ content:"";position:absolute;inset:0;z-index:-1;border:0;border-radius:0;box-shadow:none;
+ clip-path:polygon(0 0,100% 0,50% 88%);
+ background:linear-gradient(180deg,#60cfff73,#4aafed38 65%,#76dfff12);
+}
+.point.bottom.selected:after,.point.bottom.legal:after,.point.bottom.legal-double:after,.point.bottom.legal-both:after{
+ clip-path:polygon(50% 12%,0 100%,100% 100%);
+}
+.point.selected:after{background:linear-gradient(180deg,#ffdb7a91,#ffc24748 65%,#ffdb7a15)}
+.point.bottom.selected:after{background:linear-gradient(0deg,#ffdb7a91,#ffc24748 65%,#ffdb7a15)}
+.point.legal-double:after{background:linear-gradient(180deg,#ffd1776c,#ffbb4a42 65%,#ffcc8615)}
+.point.bottom.legal-double:after{background:linear-gradient(0deg,#ffd1776c,#ffbb4a42 65%,#ffcc8615)}
+.point.legal-both:after{background:linear-gradient(145deg,#4dbaff65 0 48%,#ffc95b75 52% 100%)}
+.point.bottom.legal:after{background:linear-gradient(0deg,#60cfff73,#4aafed38 65%,#76dfff12)}
+.point .step-tag{
+ top:50%;width:21px;height:21px;min-width:21px;border-width:1px;
+ background:#0b294bdc;box-shadow:0 1px 5px #0008;
+}
+.discs{
+ width:100%;max-height:calc((100dvh - var(--fold-height)) / 2 - 12px);
+ margin-top:2px;gap:0;
+}
+.bottom .discs{margin:0 0 2px}
+/* Checker diameter follows BOTH track width and available vertical height. */
+.disc{
+ flex-shrink:0;width:min(94%,clamp(19px,min(7.3vw,6.9dvh),34px));
+ height:auto;aspect-ratio:1;max-width:96%;
+ border-width:2px;line-height:1;
+}
+.disc.h{
+ background:radial-gradient(circle at 29% 18%,#fff 0%,#edf8ff 28%,#c4dce8 64%,#799fb6 89%,#4a6f8d 100%);
+ border:2px solid #e6f8ff;
+ box-shadow:inset 0 2px 2px #ffffffdf,inset 0 -3px 4px #4d7894a6,0 2px 4px #000b,0 0 0 1px #23506a6c;
+ color:#163b57;
+}
+.disc.c{
+ background:radial-gradient(circle at 29% 18%,#6eb1da 0%,#326d9b 32%,#16446f 68%,#082a4c 100%);
+ border:2px solid #76b4d9;
+ box-shadow:inset 0 2px 2px #b7e8ff5c,inset 0 -3px 4px #02172fb9,0 2px 4px #000d,0 0 0 1px #0e2037b0;
+ color:#e9f7ff;
+}
+.bar-disc,.bearing-disc{
+ width:min(90%,clamp(17px,min(6vw,5.6dvh),29px));
+ height:auto;aspect-ratio:1;max-height:none;
+}
+.bar-hit,.bearing-ai,.bearing-human{gap:2px}
+.bearing-tray .off-collect{border-width:1px;min-height:33px;box-shadow:0 0 6px #269bf04c}
+
+/* Overlay controls live only in the empty horizontal center fold. */
+.gamebar{
+ position:absolute;inset:0;z-index:6;
+ display:block;width:100%;height:100%;min-height:0;
+ border:0;border-radius:0;padding:0;margin:0;
+ background:none;box-shadow:none;
+ pointer-events:none;
+}
+.gamebar .dice{
+ position:absolute;left:24%;top:50%;transform:translate(-50%,-50%);
+ display:flex;justify-content:center;align-items:center;
+ min-height:0;width:auto;gap:7px;flex-wrap:nowrap;pointer-events:none;
+ filter:drop-shadow(0 3px 4px #000b);
+}
+.gamebar .die{
+ width:clamp(37px,min(10vw,10dvh),49px);
+ height:clamp(37px,min(10vw,10dvh),49px);
+ border-radius:9px;padding:7px;
+ border:2px solid #e9f8ff;background:linear-gradient(145deg,#fff,#cee5f1);
+ box-shadow:0 3px 0 #688ba2,0 5px 8px #0009,inset 0 1px 3px #ffffffd4;
+}
+.gamebar .dice-stack{font-size:12px;padding:3px 5px;line-height:1.2}
+.gamebar .dice-wait{font-size:21px;color:#b6d5e9}
+.gamebar .controls{
+ position:absolute;right:7%;top:50%;transform:translateY(-50%);
+ display:flex;align-items:center;gap:5px;margin:0;
+ pointer-events:auto;
+}
+.gamebar .tool{
+ width:clamp(29px,7.5dvh,36px);height:clamp(29px,7.5dvh,36px);
+ border:1px solid #608bac9c;border-radius:8px;padding:0;
+ background:linear-gradient(145deg,#1b567eeb,#0d2945ef);
+ box-shadow:0 2px 5px #0008;font-size:22px;color:#e7f7ff;
+}
+.gamebar .move-choices{
+ position:absolute;left:62%;top:50%;transform:translate(-50%,-50%);
+ width:auto;max-width:27%;min-width:0;
+ display:flex;align-items:center;justify-content:center;gap:3px;flex-wrap:wrap;
+ pointer-events:auto;
+}
+.gamebar .move-btn{
+ padding:4px 5px;min-height:27px;font-size:11px;border-radius:7px;
+ line-height:1.15;white-space:nowrap;
+}
+@media(max-width:420px){
+ .board-wrap{--fold-height:clamp(56px,12dvh,68px);border-width:4px;padding:3px}
+ .gamebar .dice{left:22%;gap:4px}
+ .gamebar .die{width:clamp(33px,9vw,40px);height:clamp(33px,9vw,40px);padding:5px}
+ .gamebar .controls{right:5%;gap:3px}
+ .gamebar .tool{width:29px;height:29px;font-size:19px}
+ .gamebar .move-choices{left:62%;max-width:29%}
+ .gamebar .move-btn{font-size:10px;padding:3px 4px}
+}
+
 </style></head><body><main class="shell">
 <section class="panel" aria-label="TavliFunny — Πόρτες">
-<div class="gamebar">
-  <div id="dice" class="dice" aria-label="Ζάρια"></div>
-  <div id="moveChoices" class="move-choices" hidden aria-label="Διάλεξε κίνηση με ένα ή δύο ζάρια"></div>
-  <div class="controls">
-    <button class="tool" id="new" type="button" aria-label="Νέα παρτίδα" title="Νέα παρτίδα">↻</button>
-    <button class="tool" id="fullscreen" type="button" aria-label="Πλήρης οθόνη" title="Πλήρης οθόνη">⛶</button>
+<div class="board-wrap">
+  <div class="board" id="board">
+    <div class="center-bar" id="centerBar" aria-label="Μπάρα με χτυπημένα πούλια"><div class="bar-hit" id="barC" role="img" aria-label="Μπλε χτυπημένα πούλια: 0"></div><button class="bar-hit" id="barH" type="button" aria-label="Λευκά χτυπημένα πούλια: 0" disabled></button></div>
+    <div id="bearingTray" class="bearing-tray" aria-label="Θέση μαζέματος πουλιών"><div id="bearingAI" class="bearing-ai" aria-label="Μπλε μαζεμένα πούλια: 0"></div><div id="bearingHuman" class="bearing-human" aria-label="Μάζεμα λευκών πουλιών"></div></div>
+  </div>
+  <div class="gamebar" aria-label="Ζάρια και χειριστήρια">
+    <div id="dice" class="dice" aria-label="Ζάρια"></div>
+    <div id="moveChoices" class="move-choices" hidden aria-label="Διάλεξε κίνηση με ένα ή δύο ζάρια"></div>
+    <div class="controls">
+      <button class="tool" id="new" type="button" aria-label="Νέα παρτίδα" title="Νέα παρτίδα">↻</button>
+      <button class="tool" id="fullscreen" type="button" aria-label="Πλήρης οθόνη" title="Πλήρης οθόνη">⛶</button>
+    </div>
   </div>
 </div>
-<div class="board-wrap"><div class="board" id="board"><div class="center-bar" id="centerBar" aria-label="Μπάρα με χτυπημένα πούλια"><div class="bar-hit" id="barC" role="img" aria-label="Μπλε χτυπημένα πούλια: 0"></div><button class="bar-hit" id="barH" type="button" aria-label="Λευκά χτυπημένα πούλια: 0" disabled></button></div><div id="bearingTray" class="bearing-tray" aria-label="Θέση μαζέματος πουλιών"><div id="bearingAI" class="bearing-ai" aria-label="Μπλε μαζεμένα πούλια: 0"></div><div id="bearingHuman" class="bearing-human" aria-label="Μάζεμα λευκών πουλιών"></div></div></div></div>
 <div class="topstrip" aria-hidden="true"><span id="turn">Η σειρά σου</span><span id="off">Εσύ 0/15 · AI 0/15</span><span id="score">Νίκες 0–0</span></div>
 <p class="message" id="message" role="status" aria-live="polite">Τα ζάρια ρίχνονται αυτόματα.</p>
 </section></main>
