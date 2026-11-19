@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="el"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071426"><meta name="color-scheme" content="dark"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>TavliFunny — Πόρτες</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#071426;color:#ecf7ff;font:14px system-ui,-apple-system,"Segoe UI",sans-serif}
+body{background:radial-gradient(ellipse at 50% -15%,#154871,#071426 65%)}button{cursor:pointer;touch-action:manipulation;font:inherit}.shell{max-width:750px;margin:auto;padding:10px 9px 30px}
+.hero{text-align:center;border:1px solid #2c557a;border-radius:18px;background:linear-gradient(135deg,#16446a,#0c2741);padding:13px 8px;margin-bottom:10px}
+h1{font-size:clamp(22px,5vw,28px);margin:2px}.subtitle{font-size:12px;color:#9cbdd7;margin:2px}.badge{font-size:25px;text-shadow:0 0 14px #1a96f1}
+.panel{background:#0b233cdd;border:1px solid #294d70;border-radius:17px;padding:10px;box-shadow:0 8px 20px #0005}.topstrip{display:flex;justify-content:space-between;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:10px}.chip{border:1px solid #305b81;border-radius:11px;background:#102d4a;padding:8px 10px;font-weight:700}.chip.small{font-size:11px;color:#a7cde5}
+.turn{color:#7ed2ff}.controls{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:12px auto}
+.btn{border-radius:11px;border:1px solid #3a6b94;padding:9px 12px;min-height:40px;background:linear-gradient(145deg,#16466f,#0e2947);color:#e9f6ff}.btn.primary{background:linear-gradient(150deg,#258fd5,#14517e);border-color:#7cc9fb}.btn:disabled{opacity:.4}.btn:focus-visible,.point:focus-visible{outline:2px solid #86dcff;outline-offset:2px}
+.dice{min-height:52px;display:flex;gap:9px;justify-content:center;align-items:center;flex-wrap:wrap}.die{border:1px solid #b7d0df;background:#f2faff;color:#15273b;border-radius:10px;width:42px;height:42px;display:grid;place-items:center;font-size:26px;font-weight:800}.die.used{opacity:.35}.die.highlight{box-shadow:0 0 13px #58bfffaa}
+.message{color:#b8d8f3;text-align:center;font-size:12px;min-height:35px;padding:9px 2px}
+.board-wrap{padding:8px;border:5px solid #1a4a70;border-radius:14px;background:linear-gradient(160deg,#104169,#0b2c4b);box-shadow:inset 0 0 20px #0008,0 5px 25px #0007}
+.board{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:180px 180px;gap:9px 2px;position:relative}
+.board:before{content:"";position:absolute;inset:calc(50% - 5px) 0;background:#0a253e;border-radius:6px;pointer-events:none}.board:after{content:"";position:absolute;top:0;bottom:0;left:calc(50% - 5px);width:10px;background:#06233b99;pointer-events:none;border-left:2px solid #6b98ae66;border-right:2px solid #6b98ae66}
+.point{position:relative;border:0;background:none;min-width:0;padding:0;display:flex;justify-content:center;align-items:flex-start;isolation:isolate}.point.bottom{align-items:flex-end}
+.point:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(155deg,#61a5cf,#2d6493);clip-path:polygon(0 0,100% 0,50% 88%)}.point.top:nth-child(even):before{background:linear-gradient(155deg,#2e557b,#142f51)}
+.point.bottom:before{clip-path:polygon(50% 12%,0 100%,100% 100%);background:linear-gradient(155deg,#548ba6,#2e5c87)}.point.bottom:nth-child(even):before{background:linear-gradient(155deg,#123756,#264c73)}
+.point.legal:after{content:"";position:absolute;inset:3px;z-index:-1;border:2px solid #6be5ff;box-shadow:0 0 12px #2af5ff88;border-radius:5px}.point.selected:after{content:"";position:absolute;inset:3px;z-index:-1;border:2px solid #ffd778;box-shadow:0 0 12px #ffcf6b88;border-radius:5px}
+.pip{position:absolute;top:3px;left:1px;color:#b6d7ee;font-size:9px;opacity:.8}.bottom .pip{top:auto;bottom:3px}
+.discs{display:flex;flex-direction:column;align-items:center;gap:1px;position:relative;z-index:1;margin-top:19px;max-height:156px}.bottom .discs{flex-direction:column-reverse;margin-top:0;margin-bottom:18px}
+.disc{height:clamp(15px,3.1vw,25px);width:clamp(15px,3.1vw,25px);max-width:95%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:10px;box-shadow:0 2px 3px #0007}.disc.h{background:radial-gradient(circle at 35% 25%,#f9fcff,#b9d9ed 75%,#77a9cf);border:2px solid #ebffff;color:#143b5d}.disc.c{background:radial-gradient(circle at 35% 25%,#548ebd,#0b2646 75%);border:2px solid #376e9c;color:#e0f3ff}.disc.count{font-size:13px}
+.barstrip{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}.bar{border:1px solid #3c6688;border-radius:9px;background:#0a2948;padding:8px;font-size:12px;text-align:center}.bar.selectable{border-color:#f3db83;box-shadow:0 0 10px #b38f5266}
+.help{color:#86aac7;text-align:center;font-size:12px;line-height:1.55;margin:12px 7px 0}
+@media(max-width:420px){.shell{padding:5px}.panel{padding:6px}.board-wrap{padding:3px;border-width:4px}.board{grid-template-rows:146px 146px;gap:7px 1px}.discs{max-height:119px;margin-top:15px}.bottom .discs{margin-top:0;margin-bottom:14px}.disc{width:clamp(14px,4vw,19px);height:clamp(14px,4vw,19px);border-width:1px}.pip{font-size:8px}.barstrip{gap:5px}}
+</style></head><body><main class="shell"><header class="hero"><div class="badge">🎲</div><h1>TavliFunny</h1><p class="subtitle">Πόρτες · Εναντίον υπολογιστή</p></header>
+<section class="panel">
+<div class="topstrip"><div class="chip" id="turn">Η σειρά σου</div><div class="chip small" id="off">Εσύ 0/15 · AI 0/15</div><div class="chip small" id="score">Νίκες 0–0</div></div>
+<div id="dice" class="dice" aria-label="Ζάρια"></div>
+<p class="message" id="message" role="status" aria-live="polite">Ρίξε τα ζάρια για να ξεκινήσεις.</p>
+<div class="board-wrap"><div class="board" id="board"></div><div class="barstrip"><button class="bar" id="barH" type="button">Λευκά εκτός: 0</button><div class="bar" id="barC">Μπλε εκτός: 0</div></div></div>
+<div class="controls"><button class="btn primary" id="roll">🎲 Ρίξε ζάρια</button><button class="btn" id="new">↻ Νέα παρτίδα</button></div>
+<p class="help">Είσαι τα λευκά: κινείσαι από το 24 προς το 1. Επίλεξε πού βρίσκεται πούλι και μετά μία φωτισμένη θέση. Τα πούλια που χτυπήθηκαν πρέπει να μπουν πρώτα από τη μπάρα. Μόλις βρεθούν όλα στο σπίτι σου, πάτα «Έξοδος».</p>
+</section></main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),SAVE='tavlifunny:portes:v1',SCORE='tavlifunny:score:v1';
+const initial=()=>{const b=Array(24).fill(0);b[23]=2;b[12]=5;b[7]=3;b[5]=5;b[0]=-2;b[11]=-5;b[16]=-3;b[18]=-5;return {b,barH:0,barC:0,offH:0,offC:0,turn:'h',dice:[],winner:null,moves:0};};
+let g=initial(),source=null,available=[],active=true,aiTimer=0,scores={h:0,c:0};
+try{scores=JSON.parse(localStorage.getItem(SCORE)||'null')||scores;}catch(_){}
+const count=(b,side,i)=>Math.max(0,b[i]*(side==='h'?1:-1)),isOwn=(b,side,i)=>count(b,side,i)>0;
+function save(){try{localStorage.setItem(SAVE,JSON.stringify(g))}catch(_){}}
+function say(v){$('message').textContent=v}
+function die(){return 1+Math.floor(Math.random()*6)}
+function possible(g,side,d){const b=g.b,res=[],bar=side==='h'?g.barH:g.barC;
+if(bar){const dest=side==='h'?24-d:d-1;if(count(b,side==='h'?'c':'h',dest)>=2)return [];return [{from:'bar',to:dest,die:d}];}
+for(let from=0;from<24;from++){if(!isOwn(b,side,from))continue;const to=from+(side==='h'?-d:d);
+if(to>=0&&to<24){if(count(b,side==='h'?'c':'h',to)<2)res.push({from,to,die:d});continue;}
+const home=side==='h'?[0,5]:[18,23],barCount=side==='h'?g.barH:g.barC;if(barCount)continue;
+let all=true;for(let p=0;p<24;p++)if(isOwn(b,side,p)&&(p<home[0]||p>home[1]))all=false;
+if(!all)continue;
+const distance=side==='h'?from+1:24-from;
+if(d===distance||(d>distance&& (side==='h'?!b.slice(from+1,6).some(x=>x>0):!b.slice(18,from).some(x=>x<0))))res.push({from,to:'off',die:d});
+}return res;}
+function apply(g,m,side){const out={...g,b:g.b.slice(),dice:g.dice.slice()},sign=side==='h'?1:-1;
+if(m.from==='bar'){if(side==='h')out.barH--;else out.barC--;}else out.b[m.from]-=sign;
+if(m.to==='off'){if(side==='h')out.offH++;else out.offC++;}
+else{if(out.b[m.to]===-sign){out.b[m.to]=0;if(side==='h')out.barC++;else out.barH++;}out.b[m.to]+=sign;}
+out.dice.splice(out.dice.indexOf(m.die),1);out.moves++;return out;}
+function enumerate(g,side,dice,sequence=[],max=4){if(!dice.length||!max)return [sequence];let sets=[];
+for(const d of [...new Set(dice)]){const moves=possible(g,side,d);for(const m of moves){const rest=dice.slice();rest.splice(rest.indexOf(d),1);const after=apply({...g,dice:dice.slice()},m,side);sets.push(...enumerate(after,side,rest,[...sequence,m],max-1));}}
+return sets.length?sets:[sequence];}
+function lines(g,side){const seqs=enumerate(g,side,g.dice);const best=Math.max(...seqs.map(s=>s.length));let good=seqs.filter(s=>s.length===best);
+if(best===1&&g.dice.length===2&&g.dice[0]!==g.dice[1]){const higher=Math.max(...good.map(s=>s[0].die));good=good.filter(s=>s[0].die===higher);}
+return good;}
+function legal(){const result=new Map();for(const line of lines(g,g.turn)){if(!line.length)continue;const m=line[0];result.set(m.from+':'+m.to+':'+m.die,m);}return [...result.values()];}
+function chooseFrom(from){if(g.turn!=='h'||!g.dice.length||g.winner)return;source=from;draw();}
+function humanTo(to){if(g.turn!=='h'||!g.dice.length||g.winner)return;
+const options=available.filter(m=>m.from===source&&m.to===to);
+if(!options.length){const other=available.filter(m=>m.from===to);if(other.length){source=to;draw();return;}say('Δεν επιτρέπεται η συγκεκριμένη κίνηση.');return;}
+const m=options.sort((a,b)=>b.die-a.die)[0];g=apply(g,m,'h');source=null;next();draw();save();}
+function next(){if(g.offH===15||g.offC===15){g.winner=g.offH===15?'h':'c';scores[g.winner]=(scores[g.winner]||0)+1;try{localStorage.setItem(SCORE,JSON.stringify(scores));}catch(_){}say(g.winner==='h'?'🏆 Κέρδισες τις Πόρτες!':'Ο υπολογιστής κέρδισε. Παίζουμε ξανά;');g.dice=[];return;}
+available=legal();
+if(!g.dice.length||!available.length){g.turn=g.turn==='h'?'c':'h';g.dice=[];available=[];source=null;if(g.turn==='h')say('Η σειρά σου. Ρίξε τα ζάρια.');else{say('Ο υπολογιστής ρίχνει ζάρια…');scheduleAI();}}
+else if(g.turn==='h')say('Διάλεξε πούλι και φωτισμένη θέση.');}
+function aiScore(seq){const temp={...g,b:g.b.slice(),dice:g.dice.slice()};let x=temp,bonus=0;for(const m of seq){const hit=m.to!=='off'&&x.b[m.to]===1; x=apply(x,m,'c');if(hit)bonus+=18;if(m.to==='off')bonus+=30;if(m.to!=='off'&&Math.abs(x.b[m.to])>=2)bonus+=3;}let home=0;for(let i=0;i<24;i++)if(x.b[i]<0)home+=-x.b[i]*(i/24);return bonus+home+Math.random()*4;}
+function runAI(){aiTimer=0;if(!active||g.turn!=='c'||g.winner)return;
+if(!g.dice.length){const a=die(),b=die();g.dice=a===b?[a,a,a,a]:[a,b];say('Ο υπολογιστής έφερε '+a+' και '+b+'.');draw();save();}
+const choices=lines(g,'c').filter(x=>x.length);
+if(!choices.length){g.dice=[];next();draw();save();return;}
+choices.sort((a,b)=>aiScore(b)-aiScore(a));g=apply(g,choices[0][0],'c');next();draw();save();if(g.turn==='c'&&g.dice.length)scheduleAI();}
+function scheduleAI(){if(aiTimer)clearTimeout(aiTimer);if(active&&g.turn==='c'&&!g.winner)aiTimer=setTimeout(runAI,420);}
+function roll(){if(!active||g.turn!=='h'||g.dice.length||g.winner)return;let a=die(),b=die();g.dice=a===b?[a,a,a,a]:[a,b];available=legal();say('Έφερες '+a+' και '+b+'.'+(a===b?' Διπλές ζαριές!':''));if(!available.length){g.dice=[];say('Δεν υπάρχει διαθέσιμη κίνηση. Παίζει ο υπολογιστής.');next();}draw();save();}
+function draw(){
+$('turn').textContent=g.winner?(g.winner==='h'?'Νίκη!':'Ήττα'):g.turn==='h'?'Η σειρά σου':'Παίζει ο υπολογιστής';
+$('score').textContent='Νίκες '+(scores.h||0)+'–'+(scores.c||0);
+$('off').textContent='Έξοδος: Εσύ '+g.offH+'/15 · AI '+g.offC+'/15';
+$('roll').disabled=!active||g.turn!=='h'||!!g.dice.length||!!g.winner;
+$('dice').replaceChildren();for(const n of g.dice){let x=document.createElement('span');x.className='die';x.textContent='⚀⚁⚂⚃⚄⚅'[n-1];x.title='Ζάρι '+n;$('dice').appendChild(x);}if(!g.dice.length)$('dice').textContent=g.winner?'Τέλος παρτίδας':'Αναμονή για ζάρια';
+$('barH').textContent='Λευκά στη μπάρα: '+g.barH;$('barC').textContent='Μπλε στη μπάρα: '+g.barC;
+$('barH').classList.toggle('selectable',source==='bar');$('barH').disabled=g.turn!=='h'||!g.barH;
+const root=$('board');root.replaceChildren();const order=[...Array.from({length:12},(_,i)=>12+i),...Array.from({length:12},(_,i)=>11-i)];const legalDest=new Set(source===null?[]:available.filter(m=>m.from===source).map(m=>m.to));
+for(let i=0;i<order.length;i++){const p=order[i],v=g.b[p],point=document.createElement('button');point.type='button';point.className='point '+(i<12?'top':'bottom')+(source===p?' selected':'')+(legalDest.has(p)?' legal':'');
+point.title='Θέση '+(p+1);point.setAttribute('aria-label','Θέση '+(p+1)+': '+Math.abs(v)+' '+(v>0?'λευκά':'μπλε'));
+const label=document.createElement('span');label.className='pip';label.textContent=p+1;point.appendChild(label);
+const box=document.createElement('span');box.className='discs';for(let j=0;j<Math.min(5,Math.abs(v));j++){let disc=document.createElement('span');disc.className='disc '+(v>0?'h':'c');if(j===4&&Math.abs(v)>5)disc.textContent='+'+(Math.abs(v)-4);box.appendChild(disc);}point.appendChild(box);
+point.addEventListener('click',()=>{if(source!==null&&legalDest.has(p))humanTo(p);else if(available.some(m=>m.from===p))chooseFrom(p);});root.appendChild(point);}
+if(legalDest.has('off')){const x=document.createElement('button');x.className='btn primary';x.textContent='✓ Έξοδος πούλι';x.addEventListener('click',()=>humanTo('off'));$('dice').appendChild(x);}
+}
+$('barH').addEventListener('click',()=>{if(g.barH&&available.some(m=>m.from==='bar'))chooseFrom('bar')});
+$('roll').addEventListener('click',roll);$('new').addEventListener('click',()=>{if(!g.winner&&g.moves&&!confirm('Νέα παρτίδα; Θα χαθεί η τωρινή.'))return;g=initial();available=[];source=null;clearTimeout(aiTimer);aiTimer=0;say('Νέα παρτίδα. Ρίξε τα ζάρια!');draw();save();});
+function visibility(){active=document.visibilityState==='visible'&&embeddedActive;if(!active){clearTimeout(aiTimer);aiTimer=0;}else if(g.turn==='c'&&!g.winner)scheduleAI();}
+let embeddedActive=true;window.addEventListener('message',e=>{if(e.origin!==location.origin)return;if(e.data?.type==='tavlifunny:visibility'){embeddedActive=!!e.data.active;visibility();}});
+document.addEventListener('visibilitychange',visibility);
+try{const saved=JSON.parse(localStorage.getItem(SAVE)||'null');if(saved&&Array.isArray(saved.b)&&saved.b.length===24&&['h','c'].includes(saved.turn)){g=saved;available=g.dice.length?legal():[];say('Η αποθηκευμένη παρτίδα συνεχίζεται.');}else say('Ρίξε τα ζάρια για να ξεκινήσεις.');}catch(_){}
+draw();if(g.turn==='c'&&active&&!g.winner)scheduleAI();
+})();
+</script></body></html>
