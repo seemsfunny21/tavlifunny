@@ -295,19 +295,37 @@ for(const choice of choices){
 panel.hidden=!choices.length;
 }
 $('barH').addEventListener('click',()=>{if(g.barH&&available.some(m=>m.from==='bar'))chooseFrom('bar')});
-$('fullscreen').addEventListener('click',async()=>{
- try{
-  if(document.fullscreenElement)await document.exitFullscreen();
-  else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen({navigationUI:'hide'});
-  else window.open(location.href,'_blank','noopener');
- }catch(_){window.open(location.href,'_blank','noopener');}
-});
-document.addEventListener('fullscreenchange',()=>{
- const on=!!document.fullscreenElement,btn=$('fullscreen');
+function parentDocument(){
+ try{return window.parent!==window?window.parent.document:null;}catch(_){return null;}
+}
+function isFullscreen(){
+ const parent=parentDocument();
+ return !!document.fullscreenElement||!!parent?.fullscreenElement;
+}
+function refreshFullscreenButton(){
+ const on=isFullscreen(),btn=$('fullscreen');
  btn.textContent=on?'⤢':'⛶';
  btn.setAttribute('aria-label',on?'Έξοδος από πλήρη οθόνη':'Πλήρης οθόνη');
  btn.title=on?'Έξοδος από πλήρη οθόνη':'Πλήρης οθόνη';
+}
+$('fullscreen').addEventListener('click',async()=>{
+ const parent=parentDocument();
+ try{
+  if(document.fullscreenElement)await document.exitFullscreen();
+  else if(parent?.fullscreenElement)await parent.exitFullscreen();
+  else if(parent?.getElementById('stage')?.requestFullscreen)
+   await parent.getElementById('stage').requestFullscreen({navigationUI:'hide'});
+  else if(document.documentElement.requestFullscreen)
+   await document.documentElement.requestFullscreen({navigationUI:'hide'});
+  else window.open(location.href,'_blank','noopener');
+ }catch(_){
+  if(!isFullscreen())window.open(location.href,'_blank','noopener');
+ }
+ refreshFullscreenButton();
 });
+document.addEventListener('fullscreenchange',refreshFullscreenButton);
+parentDocument()?.addEventListener('fullscreenchange',refreshFullscreenButton);
+refreshFullscreenButton();
 $('new').addEventListener('click',()=>{if(!g.winner&&g.moves&&!confirm('Νέα παρτίδα; Θα χαθεί η τωρινή.'))return;g=initial();available=[];source=null;chooser=null;clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;say('Νέα παρτίδα — αυτόματη ρίψη…');draw();save();scheduleRoll();});
 function visibility(){active=document.visibilityState==='visible'&&embeddedActive;if(!active){clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;}else if(!g.winner){if(g.turn==='c')scheduleAI();else if(!g.dice.length)scheduleRoll();}}
 let embeddedActive=true;window.addEventListener('message',e=>{if(e.origin!==location.origin)return;if(e.data?.type==='tavlifunny:visibility'){embeddedActive=!!e.data.active;visibility();}});
