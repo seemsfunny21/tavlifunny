@@ -97,11 +97,12 @@ html,body{width:100%;height:100%;overflow:hidden}
 .point.legal-both .step-tag{background:linear-gradient(125deg,#166a9c 0 49%,#966b2a 51%);border-color:#e1cf9e;color:#fff}
 @media(orientation:landscape){
  .shell{padding:2px max(3px,env(safe-area-inset-right)) 2px max(3px,env(safe-area-inset-left))}
- .panel{gap:3px}
- .gamebar{min-height:51px;height:51px;padding:2px 7px}
+ /* Keep a natural backgammon board shape instead of stretching edge-to-edge. */
+ .panel{gap:3px;align-items:center;--tavli-width:min(100%,calc((100dvh - 59px) * 2.08))}
+ .gamebar{min-height:51px;height:51px;padding:2px 7px;width:var(--tavli-width)}
  .gamebar .die{width:42px;height:42px;padding:6px}
  .tool{width:41px;height:41px;font-size:24px}
- .board-wrap{border-width:4px;padding:2px}
+ .board-wrap{border-width:4px;padding:2px;width:var(--tavli-width);flex:1 1 0}
  .board{grid-template-columns:repeat(6,minmax(0,1fr)) minmax(31px,44px) repeat(6,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:5px 3px}
  .disc{height:clamp(14px,5.4dvh,28px);width:clamp(14px,5.4dvh,28px)}
  .bar-disc{height:clamp(14px,4.9dvh,26px);width:min(92%,28px)}
