@@ -679,6 +679,29 @@ body{background:radial-gradient(ellipse at 50% -12%,#175183,#071426 72%)}
  .board-move-choices{bottom:calc(50% + 25px)}
 }
 
+
+/* Slightly bigger checkers at the same 1:1 shape, across all trays.
+   Size scales from viewport width on portrait phones because the entire
+   game canvas is rotated 90 degrees without changing the physical width. */
+.board .point .disc{
+ width:min(97%,clamp(19px,6.7vw,30px));
+ height:auto;aspect-ratio:1;flex:0 0 auto;
+}
+.board .bar-disc,
+.board .bearing-disc{
+ width:min(92%,clamp(18px,6.0vw,27px));
+ height:auto;aspect-ratio:1;flex:0 0 auto;
+}
+.board .discs{gap:0;max-height:100%}
+@media(min-width:651px){
+ .board .point .disc{width:min(97%,clamp(20px,3.9dvh,31px))}
+ .board .bar-disc,.board .bearing-disc{width:min(92%,clamp(18px,3.5dvh,28px))}
+}
+@media(orientation:portrait) and (max-width:370px){
+ .board .point .disc{width:min(96%,clamp(18px,6.5vw,27px))}
+ .board .bar-disc,.board .bearing-disc{width:min(91%,clamp(17px,5.8vw,25px))}
+}
+
 </style></head><body><main class="shell">
 <header class="hero">
  <div class="hero-title"><span class="badge" aria-hidden="true">🎲</span><h1>TavliFunny</h1></div>
