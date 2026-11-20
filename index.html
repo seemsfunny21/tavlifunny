@@ -263,6 +263,74 @@ body{background:radial-gradient(ellipse at 50% -15%,#16476f,#071426 70%)}
  .bar-disc,.bearing-disc{width:min(90%,clamp(15px,5.4dvh,23px))}
 }
 
+
+/* Cosmetic refinements only: fixed existing board height and placement. */
+.hero{
+ background:linear-gradient(140deg,#1b4c73dc,#102e4cde);
+ border-color:#4b7eaa8c;
+ box-shadow:inset 0 1px 0 #ffffff21,0 7px 20px #0004;
+}
+.panel{
+ background:linear-gradient(155deg,#103351ed,#0a213be8);
+ border-color:#3f719a91;
+ box-shadow:inset 0 1px #ffffff12,0 8px 25px #0005;
+}
+.gamebar{
+ background:linear-gradient(150deg,#19486d,#0c2d4b 56%,#102f4c);
+ border-color:#4b7b9d;
+ box-shadow:inset 0 1px 0 #ffffff1b,0 2px 10px #0003;
+}
+.gamebar .die{
+ background:linear-gradient(145deg,#fff 4%,#e2f4ff 46%,#c0d9e8 100%);
+ border-color:#f3fbff;
+ box-shadow:inset 0 1px 3px #fff,0 3px 0 #7a9eb7,0 6px 11px #0007;
+}
+.pip-dot.on{background:#112940;box-shadow:inset 0 1px 2px #0014268c}
+.gamebar .tool{
+ background:linear-gradient(140deg,#20567f,#103554);
+ border-color:#6b9abd88;
+ box-shadow:inset 0 1px #ffffff24,0 2px 7px #0005;
+}
+.board-wrap{
+ background:linear-gradient(155deg,#164b72,#0d3352);
+ border-color:#245779;
+ box-shadow:inset 0 0 0 1px #76a6bd35,inset 0 0 16px #001b32b3,0 5px 18px #0007;
+}
+.board{
+ background:radial-gradient(ellipse at 50% 48%,#1b5279,#0d3356 87%);
+}
+.point.top:before{
+ background:linear-gradient(170deg,#68a6cd,#4782a9 46%,#286087);
+}
+.point.top:nth-child(even):before{
+ background:linear-gradient(170deg,#2d5c82,#20476b 70%,#153859);
+}
+.point.bottom:before{
+ background:linear-gradient(10deg,#68a6cd,#4782a9 46%,#286087);
+}
+.point.bottom:nth-child(even):before{
+ background:linear-gradient(10deg,#2d5c82,#20476b 70%,#153859);
+}
+.center-bar{
+ background:linear-gradient(90deg,#071c31,#2d6587 25%,#0f3c60 52%,#2a6387 77%,#071c31);
+ border-inline-color:#7ab0d085;
+ box-shadow:inset 1px 0 2px #d2f3ff30,inset -1px 0 3px #0007;
+}
+.bearing-tray{
+ background:linear-gradient(90deg,#071e32,#24577b 25%,#0c3455 54%,#071e32);
+ border-inline-color:#739abc8a;
+}
+.disc.h{
+ background:radial-gradient(circle at 32% 23%,#fff 4%,#effaff 38%,#bcd9e9 74%,#7ea4bd);
+ box-shadow:inset 0 1px 1px #fff,inset 0 -2px 2px #668ba870,0 2px 4px #0008;
+}
+.disc.c{
+ background:radial-gradient(circle at 32% 23%,#67a1c6 4%,#346d98 37%,#143d65 78%,#09294a);
+ border-color:#478bb9;
+ box-shadow:inset 0 1px 2px #a1cae45e,inset 0 -2px 2px #0013248c,0 2px 4px #0009;
+}
+/* The legal markers and collected pieces retain their size and behavior. */
+
 </style></head><body><main class="shell">
 <header class="hero"><div class="badge" aria-hidden="true">🎲</div><h1>TavliFunny</h1></header>
 <section class="panel" aria-label="TavliFunny — Πόρτες">
