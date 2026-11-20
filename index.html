@@ -680,28 +680,28 @@ body{background:radial-gradient(ellipse at 50% -12%,#175183,#071426 72%)}
 }
 
 
-/* Slightly bigger checkers at the same 1:1 shape, across all trays.
-   Size scales from viewport width on portrait phones because the entire
-   game canvas is rotated 90 degrees without changing the physical width. */
+/* Larger Tavli pieces — preserve their natural round 1:1 proportion.
+   The whole layout rotates on portrait phones, so size is derived from
+   the long screen dimension (dvh) rather than portrait viewport width. */
 .board .point .disc{
- width:min(97%,clamp(19px,6.7vw,30px));
+ width:min(98%,clamp(25px,4.4dvh,39px));
  height:auto;aspect-ratio:1;flex:0 0 auto;
 }
-.board .bar-disc,
-.board .bearing-disc{
- width:min(92%,clamp(18px,6.0vw,27px));
+.board .point .discs{gap:0;max-height:100%;overflow:visible}
+.board .point .discs>.disc+.disc{margin-top:-7px}
+.board .bar-disc,.board .bearing-disc{
+ width:min(98%,clamp(22px,4dvh,33px));
  height:auto;aspect-ratio:1;flex:0 0 auto;
 }
-.board .discs{gap:0;max-height:100%}
 @media(min-width:651px){
- .board .point .disc{width:min(97%,clamp(20px,3.9dvh,31px))}
- .board .bar-disc,.board .bearing-disc{width:min(92%,clamp(18px,3.5dvh,28px))}
+ .board .point .disc{width:min(98%,clamp(25px,4.6dvh,39px))}
+ .board .bar-disc,.board .bearing-disc{width:min(96%,clamp(23px,4dvh,33px))}
 }
 @media(orientation:portrait) and (max-width:370px){
- .board .point .disc{width:min(96%,clamp(18px,6.5vw,27px))}
- .board .bar-disc,.board .bearing-disc{width:min(91%,clamp(17px,5.8vw,25px))}
+ .board .point .disc{width:min(98%,clamp(23px,4.1dvh,35px))}
+ .board .point .discs>.disc+.disc{margin-top:-8px}
+ .board .bar-disc,.board .bearing-disc{width:min(98%,clamp(21px,3.7dvh,30px))}
 }
-
 </style></head><body><main class="shell">
 <header class="hero">
  <div class="hero-title"><span class="badge" aria-hidden="true">🎲</span><h1>TavliFunny</h1></div>
