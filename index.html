@@ -331,6 +331,54 @@ body{background:radial-gradient(ellipse at 50% -15%,#16476f,#071426 70%)}
 }
 /* The legal markers and collected pieces retain their size and behavior. */
 
+
+/* 2026-11-20 — larger mobile board by responsive layout, NOT CSS transform/zoom.
+   Parent Applications navigation stays visible; no fullscreen request. */
+@media (max-width:599px){
+ .shell{padding:6px 3px 12px;max-width:none}
+ .hero{margin-bottom:6px;padding:8px 6px}
+ .hero .badge{font-size:19px}
+ .hero h1{font-size:20px}
+ .panel{padding:5px;gap:6px}
+ .gamebar{height:51px;min-height:51px;padding:4px 6px}
+ .gamebar .die{height:42px;width:42px;padding:6px}
+ .gamebar .tool{height:40px;width:40px}
+ .board-wrap{width:100%;aspect-ratio:.92;border-width:3px;padding:2px;margin:0 auto}
+ .board{column-gap:1px;row-gap:7px}
+ .disc{width:min(97%,clamp(17px,5.7vw,25px));height:auto;aspect-ratio:1}
+ .bar-disc,.bearing-disc{width:min(94%,clamp(16px,5.6vw,24px));height:auto;aspect-ratio:1}
+ .discs{gap:1px}
+}
+/* Wide, short screens are formerly squeezed to a narrow 2.05:1 board.
+   Free the available stage: target a larger ~2.3:1 playing surface. */
+@media (min-width:600px) and (max-height:620px){
+ .shell{
+  width:100%;
+  max-width:min(calc(100vw - 8px),calc((100dvh - 80px)*2.3),920px);
+  min-height:100dvh;padding:3px 4px;
+  display:flex;justify-content:center;overflow:visible;
+ }
+ .hero{padding:3px 6px;margin-bottom:3px;border-radius:10px}
+ .hero .badge{display:inline;font-size:16px}
+ .hero h1{display:inline;font-size:16px;margin-left:6px}
+ .panel{padding:4px;gap:3px}
+ .gamebar{width:100%;height:40px;min-height:40px;padding:2px 6px}
+ .gamebar .dice{gap:7px}
+ .gamebar .die{width:35px;height:35px;padding:5px}
+ .gamebar .tool{width:35px;height:35px;font-size:20px}
+ .gamebar .move-btn{font-size:11px;min-height:29px;padding:4px 6px}
+ .board-wrap{
+  width:100%;height:auto;aspect-ratio:2.3;
+  max-height:none;min-height:0;flex:none;
+  border-width:3px;padding:2px;margin:0 auto;
+ }
+ .board{height:100%;grid-template-rows:repeat(2,minmax(0,1fr));gap:5px 2px}
+ .disc{width:min(96%,clamp(17px,6.1dvh,29px));height:auto;aspect-ratio:1}
+ .bar-disc,.bearing-disc{width:min(93%,clamp(16px,5.9dvh,27px));height:auto;aspect-ratio:1}
+ .discs{margin-top:2px;gap:0}
+ .bottom .discs{margin:0 0 2px}
+}
+
 </style></head><body><main class="shell">
 <header class="hero"><div class="badge" aria-hidden="true">🎲</div><h1>TavliFunny</h1></header>
 <section class="panel" aria-label="TavliFunny — Πόρτες">
