@@ -680,27 +680,35 @@ body{background:radial-gradient(ellipse at 50% -12%,#175183,#071426 72%)}
 }
 
 
-/* Larger Tavli pieces — preserve their natural round 1:1 proportion.
-   The whole layout rotates on portrait phones, so size is derived from
-   the long screen dimension (dvh) rather than portrait viewport width. */
-.board .point .disc{
- width:min(98%,clamp(25px,4.4dvh,39px));
- height:auto;aspect-ratio:1;flex:0 0 auto;
+/* Correct the flex sizing bug visible on portrait phones:
+   .discs was shrink-to-fit and the percentage width of each nested .disc
+   resolved circularly against that tiny parent, reducing pieces to dots.
+   Give stacks an explicit full-point width; size each round checker inside. */
+.board .point{
+ min-width:0;overflow:visible;
 }
-.board .point .discs{gap:0;max-height:100%;overflow:visible}
+.board .point .discs{
+ box-sizing:border-box;
+ display:flex;flex-direction:column;align-items:center;
+ flex:0 0 100%;width:100%;min-width:0;max-width:100%;
+ min-height:0;max-height:100%;gap:0;overflow:visible;
+}
+.board .point .disc{
+ box-sizing:border-box;display:grid;
+ flex:0 0 auto;width:min(96%,39px);
+ height:auto;aspect-ratio:1/1;min-width:0;
+ border-radius:50%;
+}
 .board .point .discs>.disc+.disc{margin-top:-7px}
 .board .bar-disc,.board .bearing-disc{
- width:min(98%,clamp(22px,4dvh,33px));
- height:auto;aspect-ratio:1;flex:0 0 auto;
-}
-@media(min-width:651px){
- .board .point .disc{width:min(98%,clamp(25px,4.6dvh,39px))}
- .board .bar-disc,.board .bearing-disc{width:min(96%,clamp(23px,4dvh,33px))}
+ box-sizing:border-box;
+ width:min(95%,33px);height:auto;aspect-ratio:1/1;
+ flex:0 0 auto;min-width:0;border-radius:50%;
 }
 @media(orientation:portrait) and (max-width:370px){
- .board .point .disc{width:min(98%,clamp(23px,4.1dvh,35px))}
+ .board .point .disc{width:min(96%,35px)}
  .board .point .discs>.disc+.disc{margin-top:-8px}
- .board .bar-disc,.board .bearing-disc{width:min(98%,clamp(21px,3.7dvh,30px))}
+ .board .bar-disc,.board .bearing-disc{width:min(94%,30px)}
 }
 </style></head><body><main class="shell">
 <header class="hero">
