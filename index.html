@@ -379,17 +379,250 @@ body{background:radial-gradient(ellipse at 50% -15%,#16476f,#071426 70%)}
  .bottom .discs{margin:0 0 2px}
 }
 
+
+/* TichuFunny-inspired landscape table: score in title, settings in gear. */
+html,body{margin:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+body{background:radial-gradient(ellipse at 50% -12%,#175183,#071426 72%)}
+.shell{
+ width:100%;max-width:1120px;margin:0 auto;
+ height:100dvh;min-height:0;padding:7px 9px;
+ display:flex;flex-direction:column;justify-content:center;align-items:stretch;
+ gap:5px;overflow:hidden;
+}
+.hero{
+ position:relative;z-index:30;isolation:isolate;
+ width:100%;max-width:none;flex:0 0 auto;
+ display:flex;align-items:center;justify-content:space-between;
+ min-height:42px;margin:0;padding:5px 9px;gap:9px;
+ text-align:left;border:1px solid #4a8daf9e;border-radius:13px;
+ background:linear-gradient(125deg,#164d75,#0e3152 65%,#0b2945);
+ box-shadow:inset 0 1px #c8f4ff24,0 4px 14px #00182d6a;
+}
+.hero-title{display:flex;flex:0 0 auto;align-items:center;gap:6px;min-width:0}
+.hero .badge{display:inline;font-size:22px;line-height:1;margin:0;text-shadow:0 0 12px #5ca8f08a}
+.hero h1{display:inline;margin:0;font-size:clamp(18px,2.6vw,23px);line-height:1.05;white-space:nowrap;color:#ecfaff}
+.hero>.topstrip{
+ display:flex!important;position:static!important;
+ flex:1 1 auto;width:auto!important;height:auto!important;min-width:0;
+ justify-content:center;align-items:center;flex-wrap:nowrap;gap:6px;
+ padding:0!important;margin:0!important;overflow:hidden!important;
+ border:0!important;white-space:nowrap!important;clip:auto!important;
+}
+.hero .topstrip .chip,.hero .topstrip .chip.small{
+ display:inline-flex;align-items:center;justify-content:center;
+ flex:0 1 auto;min-width:0;min-height:27px;margin:0;
+ padding:5px 9px;font-size:clamp(10px,1.3vw,12px);line-height:1.15;
+ color:#cdeafb;text-align:center;white-space:nowrap;
+ border:1px solid #70b6d045;border-radius:8px;
+ background:linear-gradient(130deg,#174c70b8,#092e4b94);
+ font-weight:750;font-variant-numeric:tabular-nums;
+}
+.hero .topstrip #turn{color:#91f1cc;border-color:#68d1aa82}
+.hero .topstrip #score{color:#f3f9ff}
+.hero .topstrip #off{color:#c3daed}
+.settings-toggle{
+ flex:0 0 auto;display:grid;place-items:center;
+ width:32px;height:32px;min-height:0;padding:0;
+ border:1px solid #74b8db9d;border-radius:10px;
+ background:linear-gradient(145deg,#1b587e,#102f4f);
+ box-shadow:inset 0 1px #ffffff31,0 2px 8px #0004;
+ color:#e6f8ff;font-size:22px;line-height:1;cursor:pointer;
+}
+.settings-toggle[aria-expanded="true"]{border-color:#91e4ff;box-shadow:0 0 12px #54b9ff86}
+.settings-toggle:focus-visible{outline:2px solid #b9f1ff;outline-offset:2px}
+.settings-panel{
+ position:absolute;top:calc(100% + 5px);right:0;z-index:80;
+ display:flex;flex-direction:column;gap:8px;
+ width:min(260px,calc(100vw - 20px));max-height:min(78dvh,490px);
+ padding:12px;background:linear-gradient(150deg,#154163,#082b44);
+ border:1px solid #70b5dc;border-radius:13px;
+ box-shadow:0 14px 30px #000b,0 0 14px #2b8ec753;
+ text-align:left;overflow-y:auto;overscroll-behavior:contain;
+ scrollbar-width:thin;
+}
+.settings-panel[hidden]{display:none!important}
+.settings-panel>strong{text-align:center;font-size:14px;color:#e7f8ff}
+.settings-panel .btn{width:100%;min-height:37px;font-size:12px}
+.settings-panel .btn.warn{background:linear-gradient(135deg,#214f74,#0d3658);border-color:#73aecc}
+.tutorial-details{border:1px solid #68afc680;border-radius:10px;overflow:hidden;background:#0d3450;color:#e5f7fd}
+.tutorial-details summary{list-style:none;cursor:pointer;text-align:center;padding:9px 7px;font-size:12px;font-weight:800}
+.tutorial-details summary::-webkit-details-marker{display:none}
+.tutorial-details summary:focus-visible{outline:2px solid #9df4e9;outline-offset:-2px}
+.tutorial-details[open] summary{border-bottom:1px solid #72bccc6b;background:#1b5674}
+.tutorial-content{padding:8px 9px;max-height:190px;overflow-y:auto;-webkit-overflow-scrolling:touch;font-size:11px;line-height:1.43;text-align:left;color:#d5ebf5}
+.tutorial-content p{margin:0 0 8px}
+.tutorial-content p:last-child{margin-bottom:0}
+.tutorial-content strong{color:#a1f5dd}
+.panel{
+ --tavli-width:min(100%,calc((100dvh - 111px)*2.36));
+ width:100%;height:auto;min-height:0;flex:0 1 auto;
+ padding:6px;gap:5px;align-items:center;justify-content:center;
+ display:flex;flex-direction:column;position:relative;
+ background:linear-gradient(150deg,#103754ed,#09233de9);
+ border:1px solid #4883a899;border-radius:14px;
+ box-shadow:inset 0 1px #b7f7fc1b,0 8px 24px #0006;
+}
+.gamebar{
+ order:1;display:flex;align-items:center;justify-content:center;
+ flex:0 0 auto;width:var(--tavli-width);min-width:0;
+ height:43px;min-height:43px;margin:0!important;padding:3px 9px;
+ border:1px solid #5190b3a8;border-radius:10px;
+ background:linear-gradient(125deg,#164d70,#0b304d 70%,#113752);
+ box-shadow:inset 0 1px #ffffff1b,0 2px 9px #0003;
+ gap:8px;
+}
+.gamebar .dice{min-height:0;gap:8px;justify-content:center;flex:0 0 auto}
+.gamebar .die{width:37px;height:37px;padding:6px;box-shadow:inset 0 1px 3px #fff,0 2px 0 #7a9eb7,0 3px 9px #0007}
+.gamebar .dice-stack{font-size:11px;padding:4px 6px}
+.gamebar .move-choices{flex:0 1 auto;min-width:0}
+.gamebar .move-btn{min-height:28px;padding:4px 7px;font-size:11px}
+.board-wrap{
+ order:2;width:var(--tavli-width);max-width:100%;height:auto;
+ max-height:calc(100dvh - 118px);min-height:0;
+ aspect-ratio:2.28;flex:0 1 auto;align-self:center;
+ margin:0 auto!important;padding:3px;
+ border:4px solid #245779;border-radius:14px;
+ background:linear-gradient(155deg,#164b72,#0d3352);
+ box-shadow:inset 0 0 0 1px #76a6bd35,inset 0 0 16px #001b32b3,0 5px 18px #0007;
+ overflow:hidden;
+}
+.board{
+ display:grid;width:100%;height:100%;min-height:0;
+ grid-template-columns:repeat(6,minmax(0,1fr)) minmax(25px,38px) repeat(6,minmax(0,1fr)) minmax(26px,39px);
+ grid-template-rows:repeat(2,minmax(0,1fr));gap:5px 2px;
+ background:radial-gradient(ellipse at 50% 48%,#1b5279,#0d3356 87%);
+}
+.point{min-height:0;touch-action:manipulation}
+.discs{max-height:100%;margin-top:3px;gap:1px}
+.bottom .discs{margin:0 0 3px}
+.disc{width:min(93%,clamp(17px,2.9dvh,29px));height:auto;aspect-ratio:1;flex:none}
+.bar-disc,.bearing-disc{width:min(92%,clamp(16px,2.8dvh,27px));height:auto;aspect-ratio:1;flex:none}
+.panel>.message{
+ position:absolute!important;z-index:20;
+ left:50%;top:46px;transform:translateX(-50%);
+ width:max-content!important;max-width:calc(100% - 20px);
+ min-height:0!important;height:auto!important;max-height:none;
+ padding:5px 10px!important;margin:0!important;
+ overflow:visible!important;clip:auto!important;
+ display:none;white-space:normal!important;text-align:center;
+ border:1px solid #8ac9dbad;border-radius:10px;
+ background:#103d56f4;box-shadow:0 5px 19px #0008;
+ color:#ecfaff;font-size:11px;line-height:1.25;
+ pointer-events:none;
+}
+.panel>.message.tavli-toast{display:block}
+@media(max-width:650px){
+ .hero{gap:5px}
+ .hero .topstrip{gap:3px}
+ .hero .topstrip .chip,.hero .topstrip .chip.small{padding:3px 5px;font-size:10px;min-height:25px}
+}
+@media(min-width:651px) and (max-height:620px){
+ .shell{padding:3px 5px;gap:3px}
+ .hero{min-height:30px;padding:3px 7px;border-radius:10px}
+ .hero .badge{display:inline;font-size:16px}
+ .hero h1{display:inline;font-size:17px}
+ .hero .topstrip .chip,.hero .topstrip .chip.small{min-height:24px;padding:3px 7px}
+ .settings-toggle{width:27px;height:27px;font-size:18px}
+ .panel{--tavli-width:min(100%,calc((100dvh - 100px)*2.35));padding:4px;gap:3px}
+ .gamebar{height:36px;min-height:36px;padding:2px 6px}
+ .gamebar .die{width:32px;height:32px;padding:5px}
+ .board-wrap{max-height:calc(100dvh - 93px);padding:2px;border-width:3px}
+}
+@media(orientation:portrait) and (max-width:650px){
+ html,body{width:100%;height:100%;overflow:hidden!important;touch-action:pan-x pan-y}
+ .shell{
+  position:fixed;z-index:1;top:0;left:100vw;
+  transform-origin:top left;transform:rotate(90deg);
+  width:100dvh!important;height:100vw!important;min-height:0!important;
+  max-width:none!important;overflow:hidden!important;
+  padding:3px 5px!important;margin:0!important;
+  display:flex;flex-direction:column;align-items:stretch;
+  justify-content:flex-start!important;gap:3px;
+ }
+ .hero{height:31px;min-height:31px;flex:0 0 auto;padding:2px 6px;gap:5px;border-radius:9px}
+ .hero-title{gap:4px}
+ .hero .badge{font-size:17px}
+ .hero h1{font-size:16px;line-height:1.05}
+ .hero .topstrip{display:flex!important;gap:4px}
+ .hero .topstrip .chip,.hero .topstrip .chip.small{
+  padding:3px 6px;min-height:23px;font-size:10px;line-height:1.1;border-radius:7px;
+ }
+ .settings-toggle{width:26px;height:25px;font-size:18px;border-radius:7px}
+ .settings-panel{max-height:calc(100vw - 38px);width:245px;padding:9px;gap:6px}
+ .settings-panel>strong{font-size:12px}
+ .settings-panel .btn{min-height:31px;font-size:11px}
+ .tutorial-details summary{font-size:11px;padding:7px}
+ .tutorial-content{max-height:min(40vw,155px);font-size:10px}
+ .panel{
+  --tavli-width:min(100%,calc((100vw - 94px)*2.40));
+  height:auto;flex:1 1 0;min-height:0;min-width:0;
+  padding:4px;gap:3px;justify-content:center;border-radius:10px;
+ }
+ .gamebar{height:39px;min-height:39px;padding:2px 6px;gap:5px;border-radius:8px}
+ .gamebar .dice{gap:6px}
+ .gamebar .die{height:34px;width:34px;padding:5px;border-radius:8px}
+ .gamebar .move-btn{font-size:10px;min-height:27px;padding:3px 6px}
+ .board-wrap{
+  width:var(--tavli-width);height:auto;flex:1 1 auto;
+  min-height:0;max-height:calc(100vw - 89px);max-width:100%;
+  aspect-ratio:2.37;margin:0 auto!important;
+  border-width:3px;padding:2px;border-radius:10px;
+ }
+ .board{grid-template-columns:repeat(6,minmax(0,1fr)) minmax(25px,34px) repeat(6,minmax(0,1fr)) minmax(26px,34px);gap:4px 2px}
+ .discs{margin-top:2px;gap:0}
+ .bottom .discs{margin:0 0 2px}
+ .disc{width:min(94%,clamp(17px,3dvh,26px));height:auto}
+ .bar-disc,.bearing-disc{width:min(92%,clamp(16px,2.8dvh,24px));height:auto}
+ .pip{font-size:8px}
+ .panel>.message{top:41px;font-size:10px}
+}
+@media(orientation:portrait) and (max-width:370px){
+ .hero{height:27px;min-height:27px;padding:2px 4px;gap:3px}
+ .hero h1{font-size:14px}
+ .hero .badge{font-size:15px}
+ .hero .topstrip{gap:3px}
+ .hero .topstrip .chip,.hero .topstrip .chip.small{font-size:9px;padding:2px 4px;min-height:20px}
+ .settings-toggle{width:23px;height:22px;font-size:16px}
+ .panel{--tavli-width:min(100%,calc((100vw - 86px)*2.42));padding:3px}
+ .gamebar{height:34px;min-height:34px}
+ .gamebar .die{height:30px;width:30px;padding:4px}
+ .board-wrap{max-height:calc(100vw - 80px);border-width:2px}
+ .disc{width:min(95%,clamp(16px,2.8dvh,24px))}
+ .bar-disc,.bearing-disc{width:min(92%,clamp(15px,2.7dvh,23px))}
+}
+
 </style></head><body><main class="shell">
-<header class="hero"><div class="badge" aria-hidden="true">🎲</div><h1>TavliFunny</h1></header>
+<header class="hero">
+ <div class="hero-title"><span class="badge" aria-hidden="true">🎲</span><h1>TavliFunny</h1></div>
+ <div class="topstrip" aria-label="Σκορ και κατάσταση παρτίδας" aria-live="polite">
+  <span class="chip" id="turn">Η σειρά σου</span>
+  <span class="chip small" id="score">Νίκες 0–0</span>
+  <span class="chip small" id="off">Έξοδος · 0/15 – 0/15</span>
+ </div>
+ <button id="settingsToggle" class="settings-toggle" type="button" aria-label="Ρυθμίσεις TavliFunny" aria-expanded="false" aria-controls="settingsPanel" title="Ρυθμίσεις">⚙</button>
+ <div id="settingsPanel" class="settings-panel" hidden>
+  <strong>⚙ Ρυθμίσεις</strong>
+  <details class="tutorial-details" id="tavliTutorial">
+   <summary>📖 Πώς παίζεται το τάβλι (Πόρτες)</summary>
+   <div class="tutorial-content">
+    <p><strong>Στόχος:</strong> Βγάλε πρώτος τα 15 πούλια σου από το ταμπλό. Εσύ παίζεις με τα λευκά και ο υπολογιστής με τα μπλε.</p>
+    <p><strong>Ζάρια:</strong> Ρίχνονται αυτόματα. Μετακινείς πούλια κατά τις τιμές των δύο ζαριών. Αν φέρεις διπλές, παίζεις τέσσερις φορές την ίδια τιμή.</p>
+    <p><strong>Πώς μετακινείς:</strong> Πάτησε ένα δικό σου πούλι και μετά μια φωτισμένη θέση. Σε διαδρομές με ένα ή δύο ζάρια επιλέγεις τη σωστή κίνηση από τις διαθέσιμες επιλογές.</p>
+    <p><strong>Κλειστές θέσεις:</strong> Δεν μπαίνεις σε θέση με δύο ή περισσότερα αντίπαλα πούλια. Αν βρεις ένα μόνο αντίπαλο πούλι, το χτυπάς και πηγαίνει στη μπάρα.</p>
+    <p><strong>Χτυπημένο πούλι:</strong> Πρέπει πρώτα να το επαναφέρεις από τη μπάρα πριν μετακινήσεις άλλα πούλια.</p>
+    <p><strong>Υποχρεωτικά ζάρια:</strong> Παίζεις όσα ζάρια επιτρέπουν οι νόμιμες κινήσεις. Αν μπορείς να παίξεις μόνο το ένα από δύο διαφορετικά ζάρια, παίζεις το μεγαλύτερο.</p>
+    <p><strong>Μάζεμα:</strong> Όταν και τα 15 πούλια σου βρίσκονται στο δικό σου τελευταίο εξάρι, μπορείς να τα βγάζεις χρησιμοποιώντας τα ζάρια. Οι διαθέσιμες επιλογές εμφανίζονται στη δεξιά υποδοχή.</p>
+    <p><strong>Αποθήκευση:</strong> Η παρτίδα και οι νίκες αποθηκεύονται στη συσκευή. Η «Νέα παρτίδα» ξεκινά νέο παιχνίδι χωρίς να σβήνει τα προηγούμενα σκορ.</p>
+   </div>
+  </details>
+  <button class="btn warn" id="new" type="button">↻ Νέα παρτίδα</button>
+ </div>
+</header>
 <section class="panel" aria-label="TavliFunny — Πόρτες">
-<div class="topstrip" aria-hidden="true"><span id="turn"></span><span id="off"></span><span id="score"></span></div>
 <div class="gamebar">
   <div id="dice" class="dice" aria-label="Ζάρια"></div>
   <div id="moveChoices" class="move-choices" hidden aria-label="Διάλεξε κίνηση με ένα ή δύο ζάρια"></div>
-  <div class="controls">
-    <button class="tool" id="new" type="button" aria-label="Νέα παρτίδα" title="Νέα παρτίδα">↻</button>
 
-  </div>
 </div>
 <p class="message" id="message" role="status" aria-live="polite">Τα ζάρια ρίχνονται αυτόματα.</p>
 <div class="board-wrap"><div class="board" id="board"><div class="center-bar" id="centerBar" aria-label="Μπάρα με χτυπημένα πούλια"><div class="bar-hit" id="barC" role="img" aria-label="Μπλε χτυπημένα πούλια: 0"></div><button class="bar-hit" id="barH" type="button" aria-label="Λευκά χτυπημένα πούλια: 0" disabled></button></div><div id="bearingTray" class="bearing-tray" aria-label="Θέση μαζέματος πουλιών"><div id="bearingAI" class="bearing-ai" aria-label="Μπλε μαζεμένα πούλια: 0"></div><div id="bearingHuman" class="bearing-human" aria-label="Μάζεμα λευκών πουλιών"></div></div></div></div>
@@ -403,7 +636,14 @@ let g=initial(),source=null,available=[],chooser=null,active=true,aiTimer=0,roll
 try{scores=JSON.parse(localStorage.getItem(SCORE)||'null')||scores;}catch(_){}
 const count=(b,side,i)=>Math.max(0,b[i]*(side==='h'?1:-1)),isOwn=(b,side,i)=>count(b,side,i)>0;
 function save(){try{localStorage.setItem(SAVE,JSON.stringify(g))}catch(_){}}
-function say(v){$('message').textContent=v}
+let toastTimer=0;
+function say(v){
+ const el=$('message');el.textContent=v;
+ const important=/Δεν επιτρέπεται|Δεν υπάρχει διαθέσιμη|Κέρδισ|Κέρδισες|Νίκη|κέρδισε|Ήττα/.test(v);
+ if(toastTimer){clearTimeout(toastTimer);toastTimer=0;}
+ el.classList.toggle('tavli-toast',important);
+ if(important)toastTimer=setTimeout(()=>el.classList.remove('tavli-toast'),3000);
+}
 function die(){return 1+Math.floor(Math.random()*6)}
 function possible(g,side,d){const b=g.b,res=[],bar=side==='h'?g.barH:g.barC;
 if(bar){const dest=side==='h'?24-d:d-1;if(count(b,side==='h'?'c':'h',dest)>=2)return [];return [{from:'bar',to:dest,die:d}];}
@@ -571,7 +811,17 @@ for(const n of choices){
 panel.hidden=!choices.length;
 }
 $('barH').addEventListener('click',()=>{if(g.barH&&available.some(m=>m.from==='bar'))chooseFrom('bar')});
-$('new').addEventListener('click',()=>{if(!g.winner&&g.moves&&!confirm('Νέα παρτίδα; Θα χαθεί η τωρινή.'))return;g=initial();available=[];source=null;chooser=null;clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;say('Νέα παρτίδα — αυτόματη ρίψη…');draw();save();scheduleRoll();});
+function toggleSettings(open){
+ const panel=$('settingsPanel');
+ panel.hidden=!open;
+ $('settingsToggle').setAttribute('aria-expanded',open?'true':'false');
+}
+$('settingsToggle').addEventListener('click',()=>toggleSettings($('settingsPanel').hidden));
+document.addEventListener('click',e=>{
+ if(!$('settingsPanel').hidden&&!e.target.closest('.hero'))toggleSettings(false);
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleSettings(false);});
+$('new').addEventListener('click',()=>{if(!g.winner&&g.moves&&!confirm('Νέα παρτίδα; Θα χαθεί η τωρινή.'))return;g=initial();available=[];source=null;chooser=null;clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;say('Νέα παρτίδα — αυτόματη ρίψη…');toggleSettings(false);draw();save();scheduleRoll();});
 function visibility(){active=document.visibilityState==='visible'&&embeddedActive;if(!active){clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;}else if(!g.winner){if(g.turn==='c')scheduleAI();else if(!g.dice.length)scheduleRoll();}}
 let embeddedActive=true;window.addEventListener('message',e=>{if(e.origin!==location.origin)return;if(e.data?.type==='tavlifunny:visibility'){embeddedActive=!!e.data.active;visibility();}});
 document.addEventListener('visibilitychange',visibility);
