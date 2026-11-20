@@ -172,16 +172,107 @@ h1{font-size:clamp(22px,5vw,28px);margin:2px}.subtitle{font-size:12px;color:#9cb
  }
 }
 
+
+/* Classic centered layout (Minesweeper-style), no fullscreen or orientation lock. */
+html,body{height:auto;min-height:100%;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain}
+body{background:radial-gradient(ellipse at 50% -15%,#16476f,#071426 70%)}
+.shell{
+ width:100%;max-width:670px;
+ min-height:100vh;min-height:100dvh;height:auto;
+ margin:0 auto;padding:clamp(9px,2vw,16px) clamp(8px,2vw,14px) 22px;
+ display:flex;flex-direction:column;align-items:stretch;justify-content:center;
+ overflow:visible;
+}
+.hero{display:block;width:100%;max-width:100%;flex:0 0 auto;align-self:center;
+ padding:11px 8px;margin:0 0 9px;border-radius:19px;text-align:center;
+ background:linear-gradient(140deg,#18476cdb,#0c2741db);border:1px solid #315b7b;box-shadow:0 7px 20px #0004}
+.hero .badge{font-size:22px;display:block;line-height:1.12}
+.hero h1{font-size:clamp(18px,4.5vw,24px);display:block;margin:3px 0 0}
+.hero .subtitle{display:none}
+.panel{
+ width:100%;height:auto;flex:0 0 auto;min-height:0;
+ display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:9px;
+ padding:10px;background:#0b233bdc;border:1px solid #2e5374;border-radius:17px;
+ box-shadow:0 8px 25px #0005;--tavli-width:100%;
+}
+.topstrip{display:none!important}
+.message{
+ position:absolute!important;width:1px!important;height:1px!important;
+ overflow:hidden!important;clip:rect(0,0,0,0)!important;
+ padding:0!important;margin:-1px!important;
+ border:0!important;white-space:nowrap!important
+}
+.gamebar{
+ width:100%;min-width:0;flex:0 0 auto;height:58px;min-height:58px;
+ padding:6px 9px;margin:0;
+ display:flex;justify-content:space-between;align-items:center;gap:8px;
+ border:1px solid #2c5476;border-radius:12px;
+ background:linear-gradient(145deg,#123656,#0c2943);
+}
+.gamebar .dice{min-height:0;gap:10px;justify-content:flex-start;flex:0 0 auto}
+.gamebar .die{width:45px;height:45px;padding:7px}
+.gamebar .controls{margin:0;flex:none;gap:6px}
+.gamebar .tool{
+ width:43px;height:43px;font-size:24px;
+ border-radius:11px;background:linear-gradient(145deg,#16466d,#0a2d4a);
+ border:1px solid #5184ad;box-shadow:inset 0 1px #ffffff1a;
+}
+.gamebar .move-choices{min-width:0;flex:1 1 auto;justify-content:center}
+.gamebar .move-btn{padding:6px 8px;min-height:35px}
+.board-wrap{
+ width:100%;height:auto;flex:none;aspect-ratio:.92;
+ align-self:center;margin:1px auto 0;
+ max-height:none;min-height:0;
+ padding:5px;border:5px solid #1b4a70;
+ border-radius:15px;background:linear-gradient(160deg,#104169,#0b2c4b);
+ box-shadow:inset 0 0 17px #0007,0 5px 18px #0006;
+ overflow:hidden;
+}
+.board{
+ display:grid;width:100%;height:100%;min-height:0;
+ grid-template-rows:repeat(2,minmax(0,1fr));
+ grid-template-columns:repeat(6,minmax(0,1fr)) minmax(26px,39px) repeat(6,minmax(0,1fr)) minmax(29px,40px);
+ gap:9px 2px;
+}
+.discs{max-height:none;margin-top:5px;gap:1px}
+.bottom .discs{margin:0 0 5px}
+.disc{width:min(94%,clamp(16px,4.8vw,29px));height:auto;aspect-ratio:1;flex:none}
+.bar-disc,.bearing-disc{width:min(92%,clamp(16px,4.7vw,27px));height:auto;aspect-ratio:1;flex:none}
+@media(max-width:420px){
+ .shell{padding:8px 7px 18px}
+ .panel{padding:7px;gap:7px}
+ .gamebar{height:54px;min-height:54px;padding:5px 7px}
+ .gamebar .die{width:43px;height:43px;padding:6px}
+ .board-wrap{border-width:4px;padding:3px}
+ .board{grid-template-columns:repeat(6,minmax(0,1fr)) minmax(25px,32px) repeat(6,minmax(0,1fr)) minmax(28px,35px);column-gap:1px}
+ .disc{width:min(96%,clamp(15px,5vw,21px))}
+ .bar-disc,.bearing-disc{width:min(93%,clamp(15px,5vw,22px))}
+}
+@media(min-width:700px) and (max-height:540px){
+ .shell{max-width:min(670px,calc((100dvh - 122px)*2.05));padding:4px 6px;min-height:100dvh}
+ .hero{padding:3px 6px;margin:0 0 4px;border-radius:10px}
+ .hero .badge{display:inline;font-size:17px}
+ .hero h1{display:inline;font-size:16px;margin-left:7px}
+ .panel{padding:5px;gap:4px}
+ .gamebar{height:43px;min-height:43px;padding:3px 7px}
+ .gamebar .die{width:37px;height:37px;padding:5px}
+ .gamebar .tool{width:36px;height:36px;font-size:21px}
+ .board-wrap{aspect-ratio:2.05;border-width:3px;padding:2px}
+ .board{gap:6px 2px}
+ .disc{width:min(94%,clamp(15px,5.6dvh,26px))}
+ .bar-disc,.bearing-disc{width:min(90%,clamp(15px,5.4dvh,23px))}
+}
+
 </style></head><body><main class="shell">
-<header class="hero"><div class="badge" aria-hidden="true">🎲</div><h1>TavliFunny</h1><p class="subtitle">Πόρτες · Εναντίον υπολογιστή</p></header>
+<header class="hero"><div class="badge" aria-hidden="true">🎲</div><h1>TavliFunny</h1></header>
 <section class="panel" aria-label="TavliFunny — Πόρτες">
-<div class="topstrip"><div class="chip" id="turn">Η σειρά σου</div><div class="chip small" id="off">Εσύ 0/15 · AI 0/15</div><div class="chip small" id="score">Νίκες 0–0</div></div>
+<div class="topstrip" aria-hidden="true"><span id="turn"></span><span id="off"></span><span id="score"></span></div>
 <div class="gamebar">
   <div id="dice" class="dice" aria-label="Ζάρια"></div>
   <div id="moveChoices" class="move-choices" hidden aria-label="Διάλεξε κίνηση με ένα ή δύο ζάρια"></div>
   <div class="controls">
     <button class="tool" id="new" type="button" aria-label="Νέα παρτίδα" title="Νέα παρτίδα">↻</button>
-    <button class="tool" id="fullscreen" type="button" aria-label="Πλήρης οθόνη" title="Πλήρης οθόνη">⛶</button>
+
   </div>
 </div>
 <p class="message" id="message" role="status" aria-live="polite">Τα ζάρια ρίχνονται αυτόματα.</p>
@@ -364,37 +455,6 @@ for(const n of choices){
 panel.hidden=!choices.length;
 }
 $('barH').addEventListener('click',()=>{if(g.barH&&available.some(m=>m.from==='bar'))chooseFrom('bar')});
-function parentDocument(){
- try{return window.parent!==window?window.parent.document:null;}catch(_){return null;}
-}
-function isFullscreen(){
- const parent=parentDocument();
- return !!document.fullscreenElement||!!parent?.fullscreenElement;
-}
-function refreshFullscreenButton(){
- const on=isFullscreen(),btn=$('fullscreen');
- btn.textContent=on?'⤢':'⛶';
- btn.setAttribute('aria-label',on?'Έξοδος από πλήρη οθόνη':'Πλήρης οθόνη');
- btn.title=on?'Έξοδος από πλήρη οθόνη':'Πλήρης οθόνη';
-}
-$('fullscreen').addEventListener('click',async()=>{
- const parent=parentDocument();
- try{
-  if(document.fullscreenElement)await document.exitFullscreen();
-  else if(parent?.fullscreenElement)await parent.exitFullscreen();
-  else if(parent?.getElementById('stage')?.requestFullscreen)
-   await parent.getElementById('stage').requestFullscreen({navigationUI:'hide'});
-  else if(document.documentElement.requestFullscreen)
-   await document.documentElement.requestFullscreen({navigationUI:'hide'});
-  else window.open(location.href,'_blank','noopener');
- }catch(_){
-  if(!isFullscreen())window.open(location.href,'_blank','noopener');
- }
- refreshFullscreenButton();
-});
-document.addEventListener('fullscreenchange',refreshFullscreenButton);
-parentDocument()?.addEventListener('fullscreenchange',refreshFullscreenButton);
-refreshFullscreenButton();
 $('new').addEventListener('click',()=>{if(!g.winner&&g.moves&&!confirm('Νέα παρτίδα; Θα χαθεί η τωρινή.'))return;g=initial();available=[];source=null;chooser=null;clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;say('Νέα παρτίδα — αυτόματη ρίψη…');draw();save();scheduleRoll();});
 function visibility(){active=document.visibilityState==='visible'&&embeddedActive;if(!active){clearTimeout(aiTimer);clearTimeout(rollTimer);aiTimer=0;rollTimer=0;}else if(!g.winner){if(g.turn==='c')scheduleAI();else if(!g.dice.length)scheduleRoll();}}
 let embeddedActive=true;window.addEventListener('message',e=>{if(e.origin!==location.origin)return;if(e.data?.type==='tavlifunny:visibility'){embeddedActive=!!e.data.active;visibility();}});
